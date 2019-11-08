@@ -14,9 +14,34 @@ router.get("/", function (req, res) {
         }
         res.render("index", articles)
     });
+})
 
-    // res.render("index");
+router.put("/articles/", function (req, res) {
+    var id = req.body.id
+    console.log(req.body);
+    db.Article.update(
+        { _id: id },
+        { $set: { saved: true } },
+        function (data) {
+            res.json(data);
+        }
+    );
+});
 
+router.get("/saved", function (req, res) {
+    db.Article.find({
+        saved: true
+    }, function (err, found) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            var articles = {
+                article: found
+            }
+        }
+        res.render("index", articles)
+    });
 })
 
 module.exports = router;
