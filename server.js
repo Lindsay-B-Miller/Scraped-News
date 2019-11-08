@@ -26,3 +26,33 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 mongoose.connect(MONGODB_URI);
 
 // Routes
+
+// GET route for scraping the times website
+app.get("/scrape", function (req, res) {
+    axios.get("https://adventure.com/").then(function (response) {
+        var $ = cheerio.load(response.data);
+        $("div.card-section").each(function (i, element) {
+            var result = {};
+
+            result.title = $(this)
+                .children("a")
+                .text();
+            result.link = $(this)
+                .children("a")
+                .attr("href");
+
+            db.Article.create(result)
+                .then(function (dbArticle) {
+                    console.log(dbArticle)
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        });
+        res.send("Scrape Complete");
+    });
+});
+
+app.listen(PORT, function () {
+    console.log("App running on port http://localhost:" + PORT)
+})
