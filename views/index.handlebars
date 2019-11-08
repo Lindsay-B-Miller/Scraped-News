@@ -1,3 +1,22 @@
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/saved">Saved Articles</a>
+    </li>
+    <button type="button" class="btn btn-danger text-center">Scrape Articles</button>
+    <button type="button" class="btn btn-danger text-right">Clear Articles</button>
+
+</ul>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Adventure Scraper</h1>
+        <p class="lead">Explore articles from http://adventure.com</p>
+    </div>
+</div>
+
 <div class="container">
     {{#each article}}
     <div class="card">
@@ -5,7 +24,7 @@
         <div class="card-body">
             <!-- <h5 class="card-title">Special title treatment</h5> -->
             <p class="card-text newsDescription"></p>
-            <a class="btn btn-primary saveBtn" data-id={{_id}}>Save Article</a>
+            <a class="btn btn-primary saveBtn text-white" data-id={{_id}}>Save Article</a>
         </div>
     </div>
     {{/each}}

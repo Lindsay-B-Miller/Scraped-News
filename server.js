@@ -65,18 +65,7 @@ app.get("/scrape", function (req, res) {
 });
 
 
-// Route for getting all Articles from the db
-app.get("/articles", function (req, res) {
-    // TODO: Finish the route so it grabs all of the articles
-    db.Article.find({}, function (err, found) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.json(found);
-        }
-    });
-});
+
 
 
 app.listen(PORT, function () {
