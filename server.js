@@ -27,21 +27,21 @@ mongoose.connect(MONGODB_URI);
 
 // Routes
 
-// GET route for scraping the times website
+// GET route for scraping the adventure.com website
 app.get("/scrape", function (req, res) {
-    axios.get("https://adventure.com/").then(function (response) {
+    axios.get("http://adventure.com/").then(function (response) {
         var $ = cheerio.load(response.data);
         $("div.card-section").each(function (i, element) {
-            var result = {};
+            var results = [];
+            var articleLink = $(element).find("h3").find("a").attr("href")
+            var articleTitle = $(element).find("h3").find("a").text();
+            console.log(articleTitle);
+            console.log(articleLink);
 
-            result.title = $(this)
-                .children("a")
-                .text();
-            result.link = $(this)
-                .children("a")
-                .attr("href");
+            results.push({ link: "http://adventure.com/" + articleLink, title: articleTitle });
 
-            db.Article.create(result)
+
+            db.Article.create(results)
                 .then(function (dbArticle) {
                     console.log(dbArticle)
                 })
@@ -57,7 +57,7 @@ app.get("/scrape", function (req, res) {
 // Route for getting all Articles from the db
 app.get("/articles", function (req, res) {
     // TODO: Finish the route so it grabs all of the articles
-    db.Articles.find({}, function (err, found) {
+    db.Article.find({}, function (err, found) {
         if (err) {
             console.log(err);
         }
