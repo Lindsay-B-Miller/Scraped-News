@@ -5,8 +5,6 @@
     <li class="nav-item">
         <a class="nav-link" href="/saved">Saved Articles</a>
     </li>
-    <button type="button" class="btn btn-danger text-center">Scrape Articles</button>
-    <button type="button" class="btn btn-danger text-right">Clear Articles</button>
 
 </ul>
 
@@ -15,15 +13,20 @@
         <h1 class="display-4">Adventure Scraper</h1>
         <p class="lead">Explore articles from http://adventure.com</p>
     </div>
+    <div class="col-md-4 ml-5 text-center">
+        <button type="button" class="btn btn-danger text-center m-3 scrapeArticles">Scrape Articles</button>
+        <button type="button" class="btn btn-danger clearArticles">Clear Articles</button>
+    </div>
 </div>
 
-<div class="container">
+<div class="container row">
     {{#each article}}
-    <div class="card">
-        <h5 class="card-header newsTitle"><a class="article-link" target="_blank" href={{link}}>{{title}}</a></h5>
+    <div class="card m-2" style="width: 18rem;">
+        <img src={{picture}} class="card-img-top" alt="...">
         <div class="card-body">
-            <!-- <h5 class="card-title">Special title treatment</h5> -->
-            <p class="card-text newsDescription"></p>
+            <h5 class="card-title newsTitle"><a class="article-link" target="_blank" href={{link}}>{{title}}</a></h5>
+            {{!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p> --}}
             <a class="btn btn-primary saveBtn text-white" data-id={{_id}}>Save Article</a>
         </div>
     </div>

@@ -1,12 +1,11 @@
 <ul class="nav nav-pills">
     <li class="nav-item">
-        <a class="nav-link " href="/">Home</a>
+        <a class="nav-link" href="/">Home</a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="/saved">Saved Articles</a>
+    <li class="nav-item ">
+        <a class="nav-link active" href="/saved">Saved Articles</a>
     </li>
-    <button type="button" class="btn btn-danger text-center">Scrape Articles</button>
-    <button type="button" class="btn btn-danger text-right">Clear Articles</button>
+
 
 </ul>
 
@@ -18,18 +17,18 @@
 </div>
 
 
-<div class="container">
+<div class="container row">
     {{#each article}}
-    <div class="card">
-        <h5 class="card-header newsTitle"><a class="article-link" target="_blank" href={{link}}>{{title}}</a></h5>
+    <div class="card m-2" style="width: 18rem;">
+        <img src={{picture}} class="card-img-top" alt="...">
         <div class="card-body">
-            <!-- <h5 class="card-title">Special title treatment</h5> -->
-            <p class="card-text newsDescription"></p>
-
-
+            <h5 class="card-title newsTitle"><a class="article-link" target="_blank" href={{link}}>{{title}}</a></h5>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Add Note
+            </button>
+            <button type="button" class="btn btn-primary deleteNote">
+                Delete Note
             </button>
         </div>
     </div>

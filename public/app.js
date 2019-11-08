@@ -27,5 +27,28 @@ $(document).on("click", ".saveNote", function () {
     }).then(function (data) {
         console.log(data);
     })
-})
+});
 
+$(document).on("click", ".scrapeArticles", function () {
+    $.ajax({
+        method: "GET",
+        url: "/scrape",
+    }).then(function (data) {
+        location.reload()
+        console.log(data);
+    })
+});
+
+$(document).on("click", ".deleteNote", function () {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "DELETE",
+        url: "/notes",
+        data: {
+            id: thisId
+        }
+    }).then(function (data) {
+        location.reload()
+        console.log(data);
+    })
+});

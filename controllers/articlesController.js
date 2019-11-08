@@ -1,6 +1,10 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models")
+var axios = require("axios");
+var cheerio = require("cheerio");
+
+
 
 router.get("/", function (req, res) {
     db.Article.find({}, function (err, found) {
@@ -20,14 +24,16 @@ router.get("/", function (req, res) {
 router.get("/scrape", function (req, res) {
     axios.get("http://adventure.com/").then(function (response) {
         var $ = cheerio.load(response.data);
-        $("div.card-section").each(function (i, element) {
+        $("div.clickable").each(function (i, element) {
             var results = [];
-            var articleLink = $(element).find("h3").find("a").attr("href")
-            var articleTitle = $(element).find("h3").find("a").text();
+            var articleLink = $(element).attr("data-href")
+            var articleTitle = $(element).find("div.card-section").find("h3").find("a").text();
+            var articlePicture = $(element).find("div.card-img").find("a").find("img").attr("data-lazy-src");
             console.log(articleTitle);
             console.log(articleLink);
+            console.log(articlePicture)
 
-            results.push({ link: "http://adventure.com/" + articleLink, title: articleTitle, saved: false });
+            results.push({ link: "http://adventure.com/" + articleLink, title: articleTitle, picture: articlePicture, saved: false });
 
 
             db.Article.create(results)
@@ -37,10 +43,11 @@ router.get("/scrape", function (req, res) {
                 .catch(function (err) {
                     console.log(err);
                 });
-        });
+        })
         res.send("Scrape Complete");
     });
 });
+
 
 
 router.put("/articles/", function (req, res) {
@@ -100,6 +107,21 @@ router.get("/articles", function (req, res) {
             res.json(found);
         }
     });
+});
+
+router.delete("/notes/", function (req, res) {
+    var id = req.body.id
+    db.Note.findOne(
+        {
+            _id: id
+        })
+        .then(function (dbArticle) {
+            console.log(dbArticle)
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
 });
 
 module.exports = router;
