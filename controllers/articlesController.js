@@ -97,8 +97,20 @@ router.post("/articles/", function (req, res) {
 
 
 // Route for getting all Articles from the db
-router.get("/articles", function (req, res) {
-    // TODO: Finish the route so it grabs all of the articles
+router.get("/articles/", function (req, res) {
+    var id = req.body.id
+    db.Article.findOne({ _id: id })
+        .populate("notes")
+        .then(function (dbArticle) {
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
+// Route for getting all Articles from the db
+router.get("/articles/", function (req, res) {
     db.Article.find({}, function (err, found) {
         if (err) {
             console.log(err);
@@ -108,6 +120,19 @@ router.get("/articles", function (req, res) {
         }
     });
 });
+
+// Route for getting an Article from the db
+router.get("/articles/:id", function (req, res) {
+    db.Article.findOne({ _id: req.params.id })
+        .populate("note")
+        .then(function (dbArticle) {
+            res.json(dbArticle)
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
 
 router.delete("/notes/", function (req, res) {
     var id = req.body.id

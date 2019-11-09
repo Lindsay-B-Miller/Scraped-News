@@ -24,24 +24,29 @@
         <div class="card-body">
             <h5 class="card-title newsTitle"><a class="article-link" target="_blank" href={{link}}>{{title}}</a></h5>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button article-id={{_id}} type="button" class="btn btn-primary addNote" data-toggle="modal"
+                data-target="#exampleModal">
                 Add Note
             </button>
-            <button type="button" class="btn btn-primary deleteNote">
+            <button type="button" class="btn btn-primary deleteNote" data-id={{_id}}>
                 Delete Note
+            </button>
+            <button type="button" class="btn btn-danger m-2 viewNote" data-toggle="modal" data-target="#viewNoteModal"
+                data-id={{_id}}>
+                View Note
             </button>
         </div>
     </div>
     {{/each}}
 </div>
 
-<!-- Modal -->
+<!-- New Note Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create a new note</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -64,6 +69,27 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary saveNote" data-id={{_id}} data-dismiss="modal">Save
                     Note</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Note Modal -->
+<div class="modal fade" id="viewNoteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title noteTitle" id="exampleModalLabel">Notes:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body noteBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
