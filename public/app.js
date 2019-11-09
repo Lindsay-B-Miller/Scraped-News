@@ -52,3 +52,13 @@ $(document).on("click", ".deleteNote", function () {
         console.log(data);
     })
 });
+
+$(document).on("click", ".clearArticles", function () {
+    $.ajax({
+        method: "DELETE",
+        url: "/articles",
+    }).then(function (data) {
+        location.reload()
+        console.log(data);
+    })
+});

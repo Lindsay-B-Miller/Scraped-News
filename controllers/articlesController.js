@@ -124,4 +124,15 @@ router.delete("/notes/", function (req, res) {
         });
 });
 
+router.delete("/articles", function (req, res) {
+    db.Article.remove({}
+    ).then(function (dbArticle) {
+        console.log(dbArticle)
+        res.json(dbArticle);
+    })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
 module.exports = router;
