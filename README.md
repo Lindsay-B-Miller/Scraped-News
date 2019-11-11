@@ -27,4 +27,15 @@ To set up this project locally:
 ## Usage
 1. Upon loading the server, navigate to the home page `/`. The home page displays two buttons: a) `Scrape Articles` and b)  `Clear Articles`. Click the `Scrape Articles` button to scrape articles from www.adventures.com and load them to the home page.
 2. Once articles have been loaded, the user can click on the titles to view the original article at www.adventures.com, or save the article to the `Saved Articles` page. Clicking `Save Article` changes the boolean value `saved` to `true`, allowing them to render on the `Saved Articles` page. 
-3. Navigating to the `Save Articles` Page uncovers three more options: a) 
+3. Navigating to the `Save Articles` Page uncovers three more options: a) `Add Note`, b) `Delete Note`, and c) `View Note`.
+    a) `Add Note`: This button brings up a modal with a form that lets the user input a note title and note body.
+    b) `Delete Notes`: This button deletes all notes for that article.
+    c) `View Notes:`: This button brings up a modal that displays all the notes logged for this article. 
+
+
+## Contact
+Lindsay B Miller created this project with instructions from Trilogy Education Services.
+
+Project Link: https://github.com/Lindsay-B-Miller/Scraped-News
+
+Deployed Link: https://lindsay-b-miller.github.io/liri-node-app/
