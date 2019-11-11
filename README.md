@@ -38,4 +38,4 @@ Lindsay B Miller created this project with instructions from Trilogy Education S
 
 Project Link: https://github.com/Lindsay-B-Miller/Scraped-News
 
-Deployed Link: https://lindsay-b-miller.github.io/liri-node-app/
+Deployed Link: https://fathomless-crag-89122.herokuapp.com/
