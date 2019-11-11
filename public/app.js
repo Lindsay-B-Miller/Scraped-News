@@ -84,12 +84,12 @@ $(document).on("click", ".viewNote", function () {
         $(".noteBody").empty()
         if (data.note) {
             for (i = 0; i < data.note.length; i++) {
-                var card = $("<div class='card w-50'>");
+                console.log(data.note[i].title)
+                var card = $("<div class='card w-75 m-3'>");
                 var cardBody = ("<div class='card-body'>");
-                var cardTitle = ("<h5 class='card-title'>" + data.note[i].title);
-                // var cardBody = ("<p class='card-text'>" + data.note[i].body + "</p>");
-                cardBody.append(cardTitle);
-                // cardBody.append(cardBody);
+                var cardTitle = ("<h5 class='card-title text-primary'>" + data.note[i].title);
+                var cardBody = ("<p class='card-text'>" + data.note[i].body + "</p>");
+                card.append(cardTitle);
                 card.append(cardBody);
                 $(".noteBody").append(card)
             }

@@ -88,6 +88,7 @@ router.post("/articles/", function (req, res) {
                 $push: { note: dbNote._id }
             }, { new: true });
         }).then(function (dbArticle) {
+            console.log(dbArticle);
             res.json(dbArticle);
         })
         .catch(function (err) {
@@ -96,18 +97,19 @@ router.post("/articles/", function (req, res) {
 });
 
 
-// Route for getting all Articles from the db
-router.get("/articles/", function (req, res) {
-    var id = req.body.id
-    db.Article.findOne({ _id: id })
-        .populate("notes")
-        .then(function (dbArticle) {
-            res.json(dbArticle);
-        })
-        .catch(function (err) {
-            res.json(err);
-        });
-});
+// // Route for getting all Articles from the db
+// router.get("/articles/:id", function (req, res) {
+//     var id = req.params.id;
+//     db.Article.findOne({ _id: id })
+//         .populate("notes")
+//         .then(function (dbArticle) {
+//             console.log(dbArticle);
+//             res.json(dbArticle);
+//         })
+//         .catch(function (err) {
+//             res.json(err);
+//         });
+// });
 
 // Route for getting all Articles from the db
 router.get("/articles/", function (req, res) {
@@ -126,6 +128,8 @@ router.get("/articles/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
         .populate("note")
         .then(function (dbArticle) {
+            console.log(dbArticle);
+
             res.json(dbArticle)
         })
         .catch(function (err) {

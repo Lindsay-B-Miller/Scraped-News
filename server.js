@@ -1,11 +1,6 @@
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var axios = require("axios");
-var cheerio = require("cheerio");
-
-// Requiring models
-var db = require("./models");
 
 var PORT = 3000;
 
@@ -38,31 +33,6 @@ mongoose.connect(MONGODB_URI);
 
 // Routes
 
-// GET route for scraping the adventure.com website
-app.get("/scrape", function (req, res) {
-    axios.get("http://adventure.com/").then(function (response) {
-        var $ = cheerio.load(response.data);
-        $("div.card-section").each(function (i, element) {
-            var results = [];
-            var articleLink = $(element).find("h3").find("a").attr("href")
-            var articleTitle = $(element).find("h3").find("a").text();
-            console.log(articleTitle);
-            console.log(articleLink);
-
-            results.push({ link: "http://adventure.com/" + articleLink, title: articleTitle, saved: false });
-
-
-            db.Article.create(results)
-                .then(function (dbArticle) {
-                    console.log(dbArticle)
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-        });
-        res.send("Scrape Complete");
-    });
-});
 
 
 
